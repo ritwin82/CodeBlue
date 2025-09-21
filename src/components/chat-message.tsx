@@ -34,7 +34,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
       <div className={`flex-1 space-y-2 ${isUser ? 'flex flex-col items-end' : ''}`}>
         <div className={`inline-block max-w-[80%] ${
           isUser 
-            ? 'bg-primary text-primary-foreground rounded-lg px-4 py-2' 
+            ? 'bg-primary text-primary-foreground rounded-2xl px-4 py-2' 
             : ''
         }`}>
           <p className={`text-sm leading-relaxed ${

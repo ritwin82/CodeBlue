@@ -1,13 +1,15 @@
 import React from 'react'
 import { Card } from "./ui/card"
 import { Button } from "./ui/button"
-import { Heart, MessageCircle, Shield, Clock, Stethoscope, Pill, Calendar, Activity } from "lucide-react"
+import { MessageCircle, Shield, Clock, Stethoscope, Pill, Calendar, Activity } from "lucide-react"
+import { MedicalHeartLogo } from "./medical-heart-logo"
 
 interface WelcomeScreenProps {
   onSendMessage: (message: string) => void
+  textboxExpanded?: boolean
 }
 
-export function WelcomeScreen({ onSendMessage }: WelcomeScreenProps) {
+export function WelcomeScreen({ onSendMessage, textboxExpanded = false }: WelcomeScreenProps) {
   const suggestions = [
     {
       icon: Stethoscope,
@@ -36,14 +38,12 @@ export function WelcomeScreen({ onSendMessage }: WelcomeScreenProps) {
   ]
 
   return (
-    <div className="flex-1 flex items-center justify-center p-6">
+    <div className={`flex-1 flex items-center justify-center p-6 ${textboxExpanded ? 'pb-48' : 'pb-20'}`}>
       <div className="max-w-4xl w-full space-y-8">
         {/* Welcome Header */}
         <div className="text-center space-y-4">
           <div className="flex justify-center">
-            <div className="h-16 w-16 rounded-full bg-primary flex items-center justify-center">
-              <Heart className="h-8 w-8 text-primary-foreground" />
-            </div>
+            <MedicalHeartLogo size="lg" />
           </div>
           <h1 className="text-3xl text-foreground">Welcome to Healthcare Assistant</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

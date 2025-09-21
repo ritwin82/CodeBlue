@@ -1,13 +1,15 @@
 import React from 'react'
 import { Button } from "./ui/button"
-import { Menu, Sun, Moon, Heart } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
+import { MedicalHeartLogo } from "./medical-heart-logo"
 import { useTheme } from "./theme-provider"
 
 interface ChatHeaderProps {
   onMenuClick: () => void
+  sidebarOpen?: boolean
 }
 
-export function ChatHeader({ onMenuClick }: ChatHeaderProps) {
+export function ChatHeader({ onMenuClick, sidebarOpen = false }: ChatHeaderProps) {
   const { theme, setTheme } = useTheme()
 
   const toggleTheme = () => {
@@ -24,7 +26,7 @@ export function ChatHeader({ onMenuClick }: ChatHeaderProps) {
             onClick={onMenuClick}
             className="lg:hidden"
           >
-            <Menu className="h-4 w-4" />
+            {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>
           <Button 
             variant="ghost" 
@@ -32,12 +34,10 @@ export function ChatHeader({ onMenuClick }: ChatHeaderProps) {
             onClick={onMenuClick}
             className="hidden lg:flex"
           >
-            <Menu className="h-4 w-4" />
+            {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
-              <Heart className="h-4 w-4 text-primary-foreground" />
-            </div>
+            <MedicalHeartLogo size="md" />
             <div>
               <h1 className="text-lg font-medium text-foreground">Healthcare Assistant</h1>
               <p className="text-xs text-muted-foreground">Your personal health companion</p>

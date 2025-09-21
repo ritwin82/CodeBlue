@@ -42,26 +42,26 @@
 }
 
 .dark {
-  --background: #006989;
+  --background: #0a1821;
   --foreground: #eaebed;
-  --card: #0a7a9a;
+  --card: #1a3441;
   --card-foreground: #eaebed;
-  --popover: #0a7a9a;
+  --popover: #1a3441;
   --popover-foreground: #eaebed;
   --primary: #eaebed;
-  --primary-foreground: #006989;
-  --secondary: #0a7a9a;
+  --primary-foreground: #0a1821;
+  --secondary: #2a4551;
   --secondary-foreground: #eaebed;
-  --muted: #0a7a9a;
-  --muted-foreground: #c0c0c0;
-  --accent: #0a7a9a;
+  --muted: #1a3441;
+  --muted-foreground: #a0a8b0;
+  --accent: #2a4551;
   --accent-foreground: #eaebed;
   --destructive: #dc2626;
   --destructive-foreground: #eaebed;
-  --border: rgba(234, 235, 237, 0.2);
-  --input: #0a7a9a;
-  --input-background: #0a7a9a;
-  --switch-background: #0a7a9a;
+  --border: rgba(234, 235, 237, 0.15);
+  --input: #1a3441;
+  --input-background: #1a3441;
+  --switch-background: #2a4551;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: #eaebed;
@@ -70,13 +70,13 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: #0a7a9a;
+  --sidebar: #1a3441;
   --sidebar-foreground: #eaebed;
   --sidebar-primary: #eaebed;
-  --sidebar-primary-foreground: #006989;
-  --sidebar-accent: #1a8aaa;
+  --sidebar-primary-foreground: #0a1821;
+  --sidebar-accent: #2a4551;
   --sidebar-accent-foreground: #eaebed;
-  --sidebar-border: rgba(234, 235, 237, 0.2);
+  --sidebar-border: rgba(234, 235, 237, 0.15);
   --sidebar-ring: #eaebed;
 }
 

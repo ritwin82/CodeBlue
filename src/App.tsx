@@ -26,6 +26,7 @@ export default function App() {
   const [currentChatId, setCurrentChatId] = useState<string | null>(null)
   const [chatHistory, setChatHistory] = useState<ChatHistory[]>([])
   const [isTyping, setIsTyping] = useState(false)
+  const [textboxExpanded, setTextboxExpanded] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const currentChat = chatHistory.find(chat => chat.id === currentChatId)
@@ -132,27 +133,31 @@ export default function App() {
     <ThemeProvider defaultTheme="light" storageKey="healthcare-chat-theme">
       <div className="flex h-screen bg-background text-foreground">
         {/* Sidebar */}
-        <div className={`transition-all duration-500 ease-in-out ${sidebarOpen ? 'w-80' : 'w-0'} flex-shrink-0 overflow-hidden`}>
-          <ChatSidebar
-            isOpen={sidebarOpen}
-            onClose={() => setSidebarOpen(false)}
-            chatHistory={chatHistory}
-            onSelectChat={handleSelectChat}
-            onNewChat={handleNewChat}
-            onDeleteChat={handleDeleteChat}
-            activeChat={currentChatId || undefined}
-          />
+        <div className={`transition-all duration-500 ease-in-out ${sidebarOpen ? 'lg:w-80' : 'lg:w-0'} flex-shrink-0 overflow-hidden lg:relative`}>
+          <div className={`transform transition-transform duration-500 ease-in-out lg:translate-x-0 ${
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          }`}>
+            <ChatSidebar
+              isOpen={sidebarOpen}
+              onClose={() => setSidebarOpen(false)}
+              chatHistory={chatHistory}
+              onSelectChat={handleSelectChat}
+              onNewChat={handleNewChat}
+              onDeleteChat={handleDeleteChat}
+              activeChat={currentChatId || undefined}
+            />
+          </div>
         </div>
 
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col min-w-0">
-          <ChatHeader onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+          <ChatHeader onMenuClick={() => setSidebarOpen(!sidebarOpen)} sidebarOpen={sidebarOpen} />
           
           {messages.length === 0 ? (
-            <WelcomeScreen onSendMessage={handleSendMessage} />
+            <WelcomeScreen onSendMessage={handleSendMessage} textboxExpanded={textboxExpanded} />
           ) : (
             <ScrollArea className="flex-1">
-              <div className="space-y-0 pb-32">
+              <div className={`space-y-0 transition-all duration-500 ${textboxExpanded ? 'pb-48' : 'pb-20'}`}>
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -179,7 +184,12 @@ export default function App() {
         </div>
         
         {/* Floating Chat Input */}
-        <ChatInput onSendMessage={handleSendMessage} disabled={isTyping} sidebarOpen={sidebarOpen} />
+        <ChatInput 
+          onSendMessage={handleSendMessage} 
+          disabled={isTyping} 
+          sidebarOpen={sidebarOpen}
+          onExpandedChange={setTextboxExpanded}
+        />
       </div>
     </ThemeProvider>
   )

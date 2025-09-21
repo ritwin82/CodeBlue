@@ -7,15 +7,22 @@ interface ChatInputProps {
   onSendMessage: (message: string) => void;
   disabled?: boolean;
   sidebarOpen?: boolean;
+  onExpandedChange?: (expanded: boolean) => void;
 }
 
 export function ChatInput({
   onSendMessage,
   disabled,
   sidebarOpen = false,
+  onExpandedChange,
 }: ChatInputProps) {
   const [message, setMessage] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleExpandedChange = (expanded: boolean) => {
+    setIsExpanded(expanded);
+    onExpandedChange?.(expanded);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,10 +62,10 @@ export function ChatInput({
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
-                onFocus={() => setIsExpanded(true)}
+                onFocus={() => handleExpandedChange(true)}
                 onBlur={() => {
                   if (!message.trim()) {
-                    setIsExpanded(false);
+                    handleExpandedChange(false);
                   }
                 }}
                 placeholder={

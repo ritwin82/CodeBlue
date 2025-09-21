@@ -29,19 +29,19 @@ export function ChatSidebar({
   onDeleteChat,
   activeChat 
 }: ChatSidebarProps) {
-  if (!isOpen) return null
-
   return (
     <>
       {/* Overlay */}
       <div 
-        className="fixed inset-0 bg-black/50 z-40 lg:hidden" 
+        className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-500 ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
         onClick={onClose}
       />
       
       {/* Sidebar */}
-      <div className="fixed left-0 top-0 h-full w-80 bg-card border-r border-border z-50 lg:relative lg:z-auto">
-        <div className="flex flex-col h-full">
+      <div className="fixed left-0 top-0 h-screen w-80 bg-card border-r border-border z-50 lg:relative lg:z-auto lg:h-full">
+        <div className="flex flex-col h-screen">
           {/* Header */}
           <div className="p-4 border-b border-border">
             <Button 
