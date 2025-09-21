@@ -40,10 +40,15 @@ export function ChatSidebar({
       />
       
       {/* Sidebar */}
-      <div className="fixed left-0 top-0 h-screen w-80 bg-card border-r border-border z-50 lg:relative lg:z-auto lg:h-full">
-        <div className="flex flex-col h-screen">
+      <aside 
+        className={`fixed top-0 left-0 h-screen w-80 bg-card border-r border-border z-50
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+          transition-transform duration-300 ease-in-out
+          lg:relative lg:translate-x-0`}
+      >
+        <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="p-4 border-b border-border">
+          <header className="p-4 border-b border-border">
             <Button 
               onClick={onNewChat}
               className="w-full justify-start gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
@@ -51,11 +56,11 @@ export function ChatSidebar({
               <Plus className="h-4 w-4" />
               New Chat
             </Button>
-          </div>
+          </header>
 
           {/* Chat History */}
-          <ScrollArea className="flex-1 p-4">
-            <div className="space-y-2">
+          <ScrollArea className="flex-grow py-4">
+            <div className="px-4 space-y-2">
               <h3 className="text-sm text-muted-foreground mb-3">Recent Chats</h3>
               {chatHistory.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-8">
@@ -83,7 +88,7 @@ export function ChatSidebar({
                       variant="ghost"
                       size="sm"
                       className="opacity-0 group-hover:opacity-100 transition-opacity p-1 h-auto text-muted-foreground hover:text-destructive"
-                      onClick={(e) => {
+                      onClick={(e: { stopPropagation: () => void }) => {
                         e.stopPropagation()
                         onDeleteChat(chat.id)
                       }}
@@ -97,13 +102,13 @@ export function ChatSidebar({
           </ScrollArea>
 
           {/* Footer */}
-          <div className="p-4 border-t border-border">
+          <footer className="mt-auto p-4 border-t border-border">
             <p className="text-xs text-muted-foreground text-center">
               Healthcare Assistant v1.0
             </p>
-          </div>
+          </footer>
         </div>
-      </div>
+      </aside>
     </>
   )
 }
